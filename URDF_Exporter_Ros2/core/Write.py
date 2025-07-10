@@ -33,7 +33,7 @@ def write_link_urdf(joints_dict, repo, links_xyz_dict, file_name, inertial_dict)
     In this function, links_xyz_dict is set for write_joint_tran_urdf.
     The origin of the coordinate of center_of_mass is the coordinate of the link
     """
-    with open(file_name, mode='a') as f:
+    with open(file_name, mode='a',encoding='utf-8', newline='\n') as f:
         # for base_link
         center_of_mass = inertial_dict['base_link']['center_of_mass']
         link = Link.Link(name='base_link', xyz=[0,0,0],
@@ -77,7 +77,7 @@ def write_joint_urdf(joints_dict, repo, links_xyz_dict, file_name):
         urdf full path
     """
 
-    with open(file_name, mode='a') as f:
+    with open(file_name, mode='a',encoding='utf-8', newline='\n') as f:
         for j in joints_dict:
             parent = joints_dict[j]['parent']
             child = joints_dict[j]['child']
@@ -114,7 +114,7 @@ def write_gazebo_endtag(file_name):
     file_name: str
         urdf full path
     """
-    with open(file_name, mode='a') as f:
+    with open(file_name, mode='a',encoding='utf-8', newline='\n') as f:
         f.write('</robot>\n')
 
 
@@ -124,8 +124,8 @@ def write_urdf(joints_dict, links_xyz_dict, inertial_dict, package_name, robot_n
 
     file_name = save_dir + '/urdf/' + robot_name + '.xacro'  # the name of urdf file
     repo = package_name + '/meshes/'  # the repository of binary stl files
-    with open(file_name, mode='w') as f:
-        f.write('<?xml version="1.0" ?>\n')
+    with open(file_name, mode='w',encoding='utf-8', newline='\n') as f:
+        f.write('<?xml version="1.0" encoding="utf-8"?>\n')
         f.write('<robot name="{}" xmlns:xacro="http://www.ros.org/wiki/xacro">\n'.format(robot_name))
         f.write('\n')
         f.write('<xacro:include filename="$(find {})/urdf/materials.xacro" />'.format(package_name))
@@ -144,8 +144,8 @@ def write_materials_xacro(joints_dict, links_xyz_dict, inertial_dict, package_na
     except: pass
 
     file_name = save_dir + '/urdf/materials.xacro'  # the name of urdf file
-    with open(file_name, mode='w') as f:
-        f.write('<?xml version="1.0" ?>\n')
+    with open(file_name, mode='w',encoding='utf-8', newline='\n') as f:
+        f.write('<?xml version="1.0" encoding="utf-8"?>\n')
         f.write('<robot name="{}" xmlns:xacro="http://www.ros.org/wiki/xacro" >\n'.format(robot_name))
         f.write('\n')
         f.write('<material name="silver">\n')
@@ -172,8 +172,8 @@ def write_transmissions_xacro(joints_dict, links_xyz_dict, inertial_dict, packag
     """
 
     file_name = save_dir + '/urdf/{}.trans'.format(robot_name)  # the name of urdf file
-    with open(file_name, mode='w') as f:
-        f.write('<?xml version="1.0" ?>\n')
+    with open(file_name, mode='w',encoding='utf-8', newline='\n') as f:
+        f.write('<?xml version="1.0" encoding="utf-8"?>\n')
         f.write('<robot name="{}" xmlns:xacro="http://www.ros.org/wiki/xacro" >\n'.format(robot_name))
         f.write('\n')
 
@@ -212,8 +212,8 @@ def write_gazebo_xacro(joints_dict, links_xyz_dict, inertial_dict, package_name,
     file_name = save_dir + '/urdf/' + robot_name + '.gazebo'  # the name of urdf file
     repo = robot_name + '/meshes/'  # the repository of binary stl files
     #repo = package_name + '/' + robot_name + '/bin_stl/'  # the repository of binary stl files
-    with open(file_name, mode='w') as f:
-        f.write('<?xml version="1.0" ?>\n')
+    with open(file_name, mode='w',encoding='utf-8', newline='\n') as f:
+        f.write('<?xml version="1.0" encoding="utf-8"?>\n')
         f.write('<robot name="{}" xmlns:xacro="http://www.ros.org/wiki/xacro" >\n'.format(robot_name))
         f.write('\n')
         f.write('<xacro:property name="body_color" value="Gazebo/Silver" />\n')
@@ -266,7 +266,7 @@ def write_display_launch(package_name, robot_name, save_dir):
     file_text = launch_templates.get_display_launch_text(package_name, robot_name)
 
     file_name = os.path.join(save_dir, 'launch', 'display.launch.py')
-    with open(file_name, mode='w') as f:
+    with open(file_name, mode='w',encoding='utf-8', newline='\n') as f:
         f.write(file_text)
 
 def write_gazebo_launch(package_name, robot_name, save_dir):
@@ -288,5 +288,5 @@ def write_gazebo_launch(package_name, robot_name, save_dir):
     file_text = launch_templates.get_gazebo_launch_text(package_name, robot_name)
 
     file_name = os.path.join(save_dir, 'launch', 'gazebo.launch.py')
-    with open(file_name, mode='w') as f:
+    with open(file_name, mode='w',encoding='utf-8', newline='\n') as f:
         f.write(file_text)
